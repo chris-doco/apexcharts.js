@@ -871,10 +871,17 @@ class Line {
       }
 
       if (curve === 'stepline') {
-        linePath =
-          linePath + graphics.line(x, null, 'H') + graphics.line(null, y, 'V')
-        areaPath =
-          areaPath + graphics.line(x, null, 'H') + graphics.line(null, y, 'V')
+        if (w.config.xaxis.type === 'datetime') {
+          linePath =
+            linePath + graphics.line(null, y, 'V') + graphics.line(x, null, 'H')
+          areaPath =
+            areaPath + graphics.line(null, y, 'V') + graphics.line(x, null, 'H')
+        } else {
+          linePath =
+            linePath + graphics.line(x, null, 'H') + graphics.line(null, y, 'V')
+          areaPath =
+            areaPath + graphics.line(x, null, 'H') + graphics.line(null, y, 'V')
+        }
       } else if (curve === 'straight') {
         linePath = linePath + graphics.line(x, y)
         areaPath = areaPath + graphics.line(x, y)
